@@ -7,5 +7,6 @@ namespace portfolio_api.Models
         public string AboutMe {get; set;} = string.Empty;
         public List<SocialMedia> SocialMedia { get; set; } = [];
         public List<Project> Projects {get;set;} = [];
+        public List<Post> Posts {get;set;} = [];
     }
 }
