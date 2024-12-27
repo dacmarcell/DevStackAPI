@@ -34,6 +34,11 @@ namespace portfolio_api.Controllers{
         public async Task<ActionResult<SocialMedia>> CreateSocialMedia(SocialMedia body){
             _dbContext.SocialMedias.Add(body);
             await _dbContext.SaveChangesAsync();
+            _logger.LogInformation(
+                "Social Media with ID {ID} has been created at {CreatedAt}",
+                body.ID,
+                DateTime.Now
+            );
             return CreatedAtRoute("CreateSocialMedia", new { id = body.ID }, body);
         }
 
@@ -62,6 +67,12 @@ namespace portfolio_api.Controllers{
             _dbContext.SocialMedias.Update(foundSocialMedia);
             await _dbContext.SaveChangesAsync();
 
+            _logger.LogInformation(
+                "Social Media with ID {ID} has been updated at {UpdatedAt}",
+                foundSocialMedia.ID,
+                DateTime.Now
+            );
+
             return Ok(foundSocialMedia);
         }
 
@@ -74,6 +85,12 @@ namespace portfolio_api.Controllers{
 
             _dbContext.SocialMedias.Remove(socialMedia);
             await _dbContext.SaveChangesAsync();
+
+            _logger.LogInformation(
+                "Social Media with ID {ID} has been deleted at {DeletedAt}",
+                socialMedia.ID,
+                DateTime.Now
+            );
 
             return NoContent();
         }
