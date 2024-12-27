@@ -1,6 +1,6 @@
 @portfolio_api_HostAddress = http://localhost:5248
 
-GET {{portfolio_api_HostAddress}}/api/profile/1
+GET {{portfolio_api_HostAddress}}/api/profile/2
 Accept: application/json
 
 ###
@@ -23,8 +23,11 @@ Content-Type: application/json
 POST {{portfolio_api_HostAddress}}/api/profile/1/social-media
 Content-Type: application/json
 
+# kind: connect or disconnect
+
 {
-    "socialMediaID": 1
+    "socialMediaID": 1,
+    "kind":"connect" 
 }
 
 ###
@@ -38,5 +41,5 @@ Content-Type: application/json
 
 ###
 
-DELETE {{portfolio_api_HostAddress}}/api/profile/1
+DELETE {{portfolio_api_HostAddress}}/api/profile/2
 Accept: application/json
