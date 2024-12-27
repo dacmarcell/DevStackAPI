@@ -47,3 +47,40 @@ DELETE {{portfolio_api_HostAddress}}/api/profile/2
 Accept: application/json
 
 ### Obter redes sociais
+
+GET {{portfolio_api_HostAddress}}/api/social-media/
+Accept: application/json
+
+### Obter redes sociais por id
+
+GET {{portfolio_api_HostAddress}}/api/social-media/1
+Accept: application/json
+
+### Criar rede social
+
+POST {{portfolio_api_HostAddress}}/api/social-media/
+Content-Type: application/json
+
+# name: Nome da rede social (SocialMediaNames enum)
+
+{
+    "name":"Github",
+    "url":"https://github.com",
+    "profileID": 1
+}
+
+### Atualizar rede social
+
+PATCH {{portfolio_api_HostAddress}}/api/social-media/3
+Content-Type: application/json
+
+{
+    "name":"Linkedin",
+    "url":"https://linkedin.com",
+    "profileID": 1
+}
+
+### Deletar rede social
+
+DELETE {{portfolio_api_HostAddress}}/api/social-media/2
+Accept: application/json
