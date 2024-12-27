@@ -7,9 +7,9 @@ namespace portfolio_api.Controllers{
     [ApiController]
     [Route("api/social-media")]
     public class SocialMediaController: ControllerBase{
-        private readonly ILogger<ProfileController> _logger;
+        private readonly ILogger<SocialMediaController> _logger;
         private readonly ApplicationDBContext _dbContext;
-        public SocialMediaController(ILogger<ProfileController> logger, ApplicationDBContext dbContext){
+        public SocialMediaController(ILogger<SocialMediaController> logger, ApplicationDBContext dbContext){
             _logger = logger;
             _dbContext = dbContext;
         }
@@ -47,7 +47,14 @@ namespace portfolio_api.Controllers{
             if(!string.IsNullOrWhiteSpace(body.Name.ToString())){
                 foundSocialMedia.Name = body.Name;
             } else if (!string.IsNullOrWhiteSpace(body.ProfileID.ToString())){
+                var foundProfile = await _dbContext.Profiles.FindAsync(body.ProfileID);
+
+                if(foundProfile is null){
+                    return NotFound("Profile not found");
+                }
+
                 foundSocialMedia.ProfileID = body.ProfileID;
+                foundSocialMedia.Profile = foundProfile;
             } else if (!string.IsNullOrWhiteSpace(body.URL)){
                 foundSocialMedia.URL = body.URL;
             }
@@ -58,14 +65,14 @@ namespace portfolio_api.Controllers{
             return Ok(foundSocialMedia);
         }
 
-        [HttpDelete("{id}", Name = "DeleteProfile")]
-        public async Task<ActionResult<Profile>> DeleteProfile(int id){
-            var profile = await _dbContext.Profiles.FindAsync(id);
-            if(profile is null){
-                return NotFound("Profile not found");
+        [HttpDelete("{id}", Name = "DeleteSocialMedia")]
+        public async Task<ActionResult<Profile>> DeleteSocialMedia(int id){
+            var socialMedia = await _dbContext.SocialMedias.FindAsync(id);
+            if(socialMedia is null){
+                return NotFound("SocialMedia not found");
             }
 
-            _dbContext.Profiles.Remove(profile);
+            _dbContext.SocialMedias.Remove(socialMedia);
             await _dbContext.SaveChangesAsync();
 
             return NoContent();
