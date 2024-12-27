@@ -35,6 +35,11 @@ namespace portfolio_api.Controllers{
         public async Task<ActionResult<Profile>> CreateProfile(Profile profile){
             _dbContext.Profiles.Add(profile);
             await _dbContext.SaveChangesAsync();
+            _logger.LogInformation(
+                "Profile with ID {ID} created at {CreatedAt}",
+                profile.ID,
+                DateTime.Now
+            );
             return CreatedAtRoute("CreateProfile", new { id = profile.ID }, profile);
         }
 
@@ -64,6 +69,13 @@ namespace portfolio_api.Controllers{
             _dbContext.Profiles.Update(profile);
 
             await _dbContext.SaveChangesAsync();
+            _logger.LogInformation(
+                "Social Media with ID {SocialMediaID} connected to Profile with ID {ProfileID} at {CreatedAt}",
+                socialMedia.ID,
+                profile.ID,
+                DateTime.Now
+            );
+
             return Ok(profile);
         }
 
@@ -82,6 +94,11 @@ namespace portfolio_api.Controllers{
 
             _dbContext.Profiles.Update(foundProfile);
             await _dbContext.SaveChangesAsync();
+            _logger.LogInformation(
+                "Profile with ID {ID} updated at {UpdatedAt}",
+                foundProfile.ID,
+                DateTime.Now
+            );
 
             return Ok(foundProfile);
         }
@@ -95,6 +112,12 @@ namespace portfolio_api.Controllers{
 
             _dbContext.Profiles.Remove(profile);
             await _dbContext.SaveChangesAsync();
+
+            _logger.LogInformation(
+                "Profile with ID {ID} deleted at {DeletedAt}",
+                profile.ID,
+                DateTime.Now
+            );
 
             return NoContent();
         }
