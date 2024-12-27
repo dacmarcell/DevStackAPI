@@ -15,7 +15,7 @@ namespace portfolio_api.Controllers{
 
         [HttpGet(Name = "GetProfile")]
         public IEnumerable<Profile> Get(){
-          return _dbContext.Profiles.ToList();
+          return [.. _dbContext.Profiles];
         }
 
         [HttpGet("{id}", Name = "GetProfileById")]
@@ -55,6 +55,19 @@ namespace portfolio_api.Controllers{
             await _dbContext.SaveChangesAsync();
 
             return Ok(foundProfile);
+        }
+
+        [HttpDelete("{id}", Name = "DeleteProfile")]
+        public async Task<ActionResult<Profile>> Delete(int id){
+            var profile = await _dbContext.Profiles.FindAsync(id);
+            if(profile == null){
+                return NotFound();
+            }
+
+            _dbContext.Profiles.Remove(profile);
+            await _dbContext.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 }
