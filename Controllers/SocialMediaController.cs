@@ -37,35 +37,6 @@ namespace portfolio_api.Controllers{
             return CreatedAtRoute("CreateSocialMedia", new { id = body.ID }, body);
         }
 
-        // [HttpPost("{id}/social-media", Name = "ConnectOrDisconnectSocialMedia")]
-        // public async Task<ActionResult<Profile>> ConnectOrDisconnectSocialMedia(int id, [FromBody] ConnectOrDisconnectSocialMediaDto body){
-        //     var profile = await _dbContext.Profiles
-        //         .Include(profile => profile.SocialMedia)
-        //         .FirstOrDefaultAsync(profile => profile.ID == id);
-                
-        //     if (profile is null) {
-        //         return NotFound("Profile not found");
-        //     }
-
-        //     var socialMedia = await _dbContext.SocialMedias.FindAsync(body.SocialMediaID);
-        //     if (socialMedia is null) {
-        //         return NotFound("Social Media not found");
-        //     }
-
-        //     if (body.Kind == SocialMediaKind.Connect) {
-        //         profile.SocialMedia.Add(socialMedia);
-        //     } else if (body.Kind == SocialMediaKind.Disconnect) {
-        //         profile.SocialMedia.Remove(socialMedia);
-        //     } else {
-        //         return BadRequest("Invalid Kind");
-        //     }
-            
-        //     _dbContext.Profiles.Update(profile);
-
-        //     await _dbContext.SaveChangesAsync();
-        //     return Ok(profile);
-        // }
-
         [HttpPatch("{id}", Name = "UpdateSocialMedia")]
         public async Task<ActionResult<Profile>> UpdateSocialMedia(int id, [FromBody] UpdateSocialMediaDto body){
             var foundSocialMedia = await _dbContext.SocialMedias.FindAsync(id);
