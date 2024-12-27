@@ -5,5 +5,29 @@ Accept: application/json
 
 ###
 
+GET {{portfolio_api_HostAddress}}/api/profile/3
+Accept: application/json
+
+###
+
 GET {{portfolio_api_HostAddress}}/api/profile/
 Accept: application/json
+
+###
+
+POST {{portfolio_api_HostAddress}}/api/profile/
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "aboutMe": "I am a software developer"
+}
+
+###
+
+PATCH {{portfolio_api_HostAddress}}/api/profile/3
+Content-Type: application/json
+
+{
+    "name":"João Duim"
+}
