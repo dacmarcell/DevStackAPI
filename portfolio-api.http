@@ -4,3 +4,6 @@ GET {{portfolio_api_HostAddress}}/api/weatherforecast/
 Accept: application/json
 
 ###
+
+GET {{portfolio_api_HostAddress}}/api/profile/
+Accept: application/json
