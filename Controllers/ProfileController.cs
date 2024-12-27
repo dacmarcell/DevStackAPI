@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using portfolio_api.Data;
+using portfolio_api.Dtos.Profile;
 using portfolio_api.Models;
 
 namespace portfolio_api.Controllers{
@@ -39,7 +40,7 @@ namespace portfolio_api.Controllers{
         [HttpPatch("{id}", Name = "UpdateProfile")]
         public async Task<ActionResult<Profile>> Patch(int id, [FromBody] Profile body){
             var foundProfile = await _dbContext.Profiles.FindAsync(id);
-            if(foundProfile == null){
+            if(foundProfile is null){
                 return NotFound();
             }
 
@@ -60,7 +61,7 @@ namespace portfolio_api.Controllers{
         [HttpDelete("{id}", Name = "DeleteProfile")]
         public async Task<ActionResult<Profile>> Delete(int id){
             var profile = await _dbContext.Profiles.FindAsync(id);
-            if(profile == null){
+            if(profile is null){
                 return NotFound();
             }
 
@@ -68,6 +69,32 @@ namespace portfolio_api.Controllers{
             await _dbContext.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        [HttpPost("{id}/social-media", Name = "ConnectOrDisconnectSocialMedia")]
+        public async Task<ActionResult<Profile>> ConnectSocialMedia(int id, [FromBody] ConnectOrDisconnectSocialMediaDto body){
+            var profile = await _dbContext.Profiles.FindAsync(id);
+            if(profile is null){
+                return NotFound();
+            }
+
+            var socialMedia = await _dbContext.SocialMedias.FindAsync(body.SocialMediaID);
+            if(socialMedia is null){
+                return NotFound();
+            }
+
+            if(body.Kind == SocialMediaKind.Connect){
+                profile.SocialMedia.Add(socialMedia);
+            } else if (body.Kind == SocialMediaKind.Disconnect) {
+                profile.SocialMedia.Remove(socialMedia);
+            } else {
+                return BadRequest();
+            }
+            
+            _dbContext.Profiles.Update(profile);
+
+            await _dbContext.SaveChangesAsync();
+            return Ok(profile);
         }
     }
 }
