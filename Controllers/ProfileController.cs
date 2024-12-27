@@ -43,6 +43,7 @@ namespace portfolio_api.Controllers{
             var profile = await _dbContext.Profiles
                 .Include(profile => profile.SocialMedia)
                 .FirstOrDefaultAsync(profile => profile.ID == id);
+                
             if (profile is null) {
                 return NotFound("Profile not found");
             }
