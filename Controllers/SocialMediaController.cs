@@ -31,7 +31,7 @@ namespace portfolio_api.Controllers{
         }
 
         [HttpPost(Name = "CreateSocialMedia")]
-        public async Task<ActionResult<SocialMedia>> CreateSocialMedia(SocialMedia body){
+        public async Task<ActionResult<SocialMedia>> CreateSocialMedia([FromBody] CreateSocialMediaDto body){
             if(string.IsNullOrWhiteSpace(body.Name.ToString())){
                 return BadRequest("Name is required");
             } else if (string.IsNullOrWhiteSpace(body.ProfileID.ToString())) {
@@ -45,16 +45,30 @@ namespace portfolio_api.Controllers{
                 return NotFound("Profile not found");
             }
 
-            body.Profile = foundProfile;
+            bool isValidSocialMediaEnum = Enum.TryParse<Enums.SocialMediaNames>(body.Name.ToString(), out var validSocialMediaName);
 
-            _dbContext.SocialMedias.Add(body);
-            await _dbContext.SaveChangesAsync();
-            _logger.LogInformation(
-                "Social Media with ID {ID} has been created at {CreatedAt}",
-                body.ID,
-                DateTime.Now
-            );
-            return CreatedAtRoute("CreateSocialMedia", new { id = body.ID }, body);
+
+            if(isValidSocialMediaEnum){
+                var socialMedia = new SocialMedia{
+                    Name = validSocialMediaName,
+                    ProfileID = body.ProfileID,
+                    Profile = foundProfile,
+                    URL = body.URL
+                };
+
+                _dbContext.SocialMedias.Add(socialMedia);
+                await _dbContext.SaveChangesAsync();
+
+                _logger.LogInformation(
+                    "Social Media with ID {ID} has been created at {CreatedAt}",
+                    socialMedia.ID,
+                    DateTime.Now
+                );
+
+                return CreatedAtRoute("CreateSocialMedia", new { id = socialMedia.ID }, body);
+            } else {
+                return BadRequest("Invalid Name");
+            }
         }
 
         [HttpPatch("{id}", Name = "UpdateSocialMedia")]
