@@ -11,7 +11,7 @@ builder.Services.AddEndpointsApiExplorer().AddSwaggerGen(services => {
     services.ResolveConflictingActions(options => options.First());
 });
 
-builder.Services.AddControllers().AddNewtonsoftJson();
+builder.Services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter()));
 builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(connectionString));
 
 var app = builder.Build();
