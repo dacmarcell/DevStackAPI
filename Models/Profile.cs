@@ -1,7 +1,5 @@
-namespace portfolio_api.Models
-{
-    public class Profile
-    {
+namespace portfolio_api.Models {
+    public class Profile {
         public int ID { get; set; }
         public required string  Name { get; set; }
         public string AboutMe {get; set;} = string.Empty;
