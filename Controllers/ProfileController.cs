@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using portfolio_api.Data;
-using portfolio_api.Dtos;
+using portfolio_api.Dtos.ProfileDtos;
 using portfolio_api.Enums;
 using portfolio_api.Models;
 
@@ -59,10 +59,13 @@ namespace portfolio_api.Controllers{
                 return NotFound("Social Media not found");
             }
 
-            if (body.Kind == SocialMediaKind.Connect) {
+            if (body.Kind == ConnectOrDisconnect.Connect) {
                 profile.SocialMedia.Add(socialMedia);
-            } else if (body.Kind == SocialMediaKind.Disconnect) {
-                profile.SocialMedia.Remove(socialMedia);
+            } else if (body.Kind == ConnectOrDisconnect.Disconnect) {
+                bool wasRemoved = profile.SocialMedia.Remove(socialMedia);
+                if (wasRemoved == false) {
+                    return NotFound("Social Media not found in Profile");
+                }
             } else {
                 return BadRequest("Invalid Kind");
             }
@@ -73,6 +76,45 @@ namespace portfolio_api.Controllers{
             _logger.LogInformation(
                 "Social Media with ID {SocialMediaID} connected to Profile with ID {ProfileID} at {CreatedAt}",
                 socialMedia.ID,
+                profile.ID,
+                DateTime.Now
+            );
+
+            return Ok(profile);
+        }
+
+        [HttpPost("{id}/project", Name = "ConnectOrDisconnectProject")]
+        public async Task<ActionResult<Profile>> ConnectOrDisconnectProject(int id, [FromBody] ConnectOrDisconnectProjectDto body) {
+            var profile = await _dbContext.Profiles
+                .Include(profile => profile.Projects)
+                .FirstOrDefaultAsync(profile => profile.ID == id);
+                
+            if (profile is null) {
+                return NotFound("Profile not found");
+            }
+
+            var project = await _dbContext.Projects.FindAsync(body.ProjectID);
+            if (project is null) {
+                return NotFound("Project not found");
+            }
+
+            if (body.Kind == ConnectOrDisconnect.Connect) {
+                profile.Projects.Add(project);
+            } else if (body.Kind == ConnectOrDisconnect.Disconnect) {
+                bool wasRemoved = profile.Projects.Remove(project);
+                if(wasRemoved == false){
+                    return NotFound("Project not found in Profile");
+                }
+            } else {
+                return BadRequest("Invalid Kind");
+            }
+            
+            _dbContext.Profiles.Update(profile);
+
+            await _dbContext.SaveChangesAsync();
+            _logger.LogInformation(
+                "Project with ID {ProjectID} connected to Profile with ID {ProfileID} at {CreatedAt}",
+                project.ID,
                 profile.ID,
                 DateTime.Now
             );
