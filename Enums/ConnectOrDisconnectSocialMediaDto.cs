@@ -1,8 +1,4 @@
-using System.Runtime.Serialization;
-using System.Text.Json.Serialization;
-using Newtonsoft.Json.Converters;
-
-namespace portfolio_api.Dtos.Profile {
+namespace portfolio_api.Dtos {
     // [JsonConverter(typeof(StringEnumConverter))]
     public enum SocialMediaKind {
         // [EnumMember(Value = "connect")]
