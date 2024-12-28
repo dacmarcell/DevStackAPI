@@ -46,8 +46,6 @@ namespace portfolio_api.Controllers{
             }
 
             bool isValidSocialMediaEnum = Enum.TryParse<Enums.SocialMediaNames>(body.Name.ToString(), out var validSocialMediaName);
-
-
             if(isValidSocialMediaEnum){
                 var socialMedia = new SocialMedia{
                     Name = validSocialMediaName,
