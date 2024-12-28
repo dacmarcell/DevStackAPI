@@ -32,6 +32,21 @@ namespace portfolio_api.Controllers{
 
         [HttpPost(Name = "CreateSocialMedia")]
         public async Task<ActionResult<SocialMedia>> CreateSocialMedia(SocialMedia body){
+            if(string.IsNullOrWhiteSpace(body.Name.ToString())){
+                return BadRequest("Name is required");
+            } else if (string.IsNullOrWhiteSpace(body.ProfileID.ToString())) {
+                return BadRequest("ProfileID is required");
+            } else if (string.IsNullOrWhiteSpace(body.URL)){
+                return BadRequest("URL is required");
+            }
+
+            var foundProfile = await _dbContext.Profiles.FindAsync(body.ProfileID);
+            if(foundProfile is null){
+                return NotFound("Profile not found");
+            }
+
+            body.Profile = foundProfile;
+
             _dbContext.SocialMedias.Add(body);
             await _dbContext.SaveChangesAsync();
             _logger.LogInformation(
@@ -50,16 +65,22 @@ namespace portfolio_api.Controllers{
             }
 
             if(!string.IsNullOrWhiteSpace(body.Name.ToString())){
-                foundSocialMedia.Name = body.Name;
-            } else if (!string.IsNullOrWhiteSpace(body.ProfileID.ToString())){
+                bool isValidSocialMediaEnum = Enum.TryParse<Enums.SocialMediaNames>(body.Name.ToString(), out var validSocialMediaName);
+
+                if(isValidSocialMediaEnum){
+                    foundSocialMedia.Name = validSocialMediaName;
+                } else {
+                    return BadRequest("Invalid Name");
+                }
+            } else if (body.ProfileID.HasValue){
                 var foundProfile = await _dbContext.Profiles.FindAsync(body.ProfileID);
 
-                if(foundProfile is null){
+                if(foundProfile != null){
+                    foundSocialMedia.ProfileID = body.ProfileID.Value;
+                    foundSocialMedia.Profile = foundProfile;
+                } else {
                     return NotFound("Profile not found");
                 }
-
-                foundSocialMedia.ProfileID = body.ProfileID;
-                foundSocialMedia.Profile = foundProfile;
             } else if (!string.IsNullOrWhiteSpace(body.URL)){
                 foundSocialMedia.URL = body.URL;
             }
