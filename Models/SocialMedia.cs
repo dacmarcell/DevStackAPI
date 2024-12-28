@@ -1,9 +1,7 @@
 using portfolio_api.Enums;
 
-namespace portfolio_api.Models
-{
-    public class SocialMedia
-    {
+namespace portfolio_api.Models {
+    public class SocialMedia{
         public int ID {get; set;}
         public required SocialMediaNames Name {get; set;}
         public required string URL {get; set;}
