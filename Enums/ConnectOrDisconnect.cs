@@ -1,5 +1,5 @@
 namespace portfolio_api.Enums {
-    public enum SocialMediaKind {
+    public enum ConnectOrDisconnect {
         Connect,
         Disconnect
     };
