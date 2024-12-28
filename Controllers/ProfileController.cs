@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using portfolio_api.Data;
 using portfolio_api.Dtos;
+using portfolio_api.Enums;
 using portfolio_api.Models;
 
 namespace portfolio_api.Controllers{
