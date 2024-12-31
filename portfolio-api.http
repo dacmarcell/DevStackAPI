@@ -25,6 +25,19 @@ Content-Type: application/json
 POST {{portfolio_api_HostAddress}}/api/profile/1/social-media
 Content-Type: application/json
 
+### Conectar ou desconectar perfil de usuário a um projeto
+
+POST {{portfolio_api_HostAddress}}/api/profile/1/project
+Content-Type: application/json
+
+# kind: connect or disconnect
+
+{
+    "projectID": 1,
+    "kind":"connect"
+}
+
+
 # kind: connect or disconnect
 
 {
