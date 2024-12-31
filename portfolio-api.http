@@ -98,3 +98,36 @@ Content-Type: application/json
 
 DELETE {{portfolio_api_HostAddress}}/api/social-media/2
 Accept: application/json
+
+### Obter projetos
+
+GET {{portfolio_api_HostAddress}}/api/project/
+Accept: application/json
+
+### Criar projeto
+
+POST {{portfolio_api_HostAddress}}/api/project
+Content-Type: application/json
+
+{
+    "name":"IdeaPlanAI",
+    "description":"lorem ipsum",
+    "githubURL":"https://github.com/",
+    "deployURL":"https://deploy.com/",
+    "profileID": 3
+}
+
+### Atualizar projeto
+
+PATCH {{portfolio_api_HostAddress}}/api/project/3
+Content-Type: application/json
+
+{
+    "name":"GameRave",
+    "profileID": 2
+}
+
+### Deletar projeto
+
+DELETE {{portfolio_api_HostAddress}}/api/project/2
+Accept: application/json
