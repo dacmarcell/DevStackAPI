@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using portfolio_api.Data;
-using portfolio_api.Dtos;
+using portfolio_api.Dtos.SocialMediaDtos;
 using portfolio_api.Models;
 
 namespace portfolio_api.Controllers{
