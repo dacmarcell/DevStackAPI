@@ -42,8 +42,9 @@ Content-Type: application/json
 
 {
     "socialMediaID": 1,
-    "kind":"connect" 
+    "kind":"connect"
 }
+
 
 ### Atualizar perfil de usuário
 
