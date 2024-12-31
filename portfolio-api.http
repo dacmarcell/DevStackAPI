@@ -20,7 +20,7 @@ Content-Type: application/json
     "aboutMe": "I am a software developer"
 }
 
-### Conectar ou desconectar perfil de usuário a uma rede social 
+### Conectar ou desconectar perfil de usuário a uma rede social
 
 POST {{portfolio_api_HostAddress}}/api/profile/1/social-media
 Content-Type: application/json
