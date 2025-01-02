@@ -24,7 +24,7 @@ namespace portfolio_api.Controllers {
         [HttpGet("{id}", Name = "GetProjectById")]
         public async Task<ActionResult<Project>> GetProjectById(int id) {
             var project = await _dbContext.Projects.FindAsync(id);
-            if (project is null) {
+            if (project == null) {
                 return NotFound("Project not found");
             }
 
@@ -49,6 +49,8 @@ namespace portfolio_api.Controllers {
             var project = new Project {
                 Name = body.Name,
                 Description = body.Description,
+                GithubURL = body.GithubURL ?? "",
+                DeployURL = body.DeployURL ?? "",
                 ProfileID = body.ProfileID,
                 Profile = profile
             };
@@ -69,40 +71,48 @@ namespace portfolio_api.Controllers {
         public async Task<ActionResult<Project>> UpdateProject(int id, [FromBody] UpdateProjectDto body)
         {
             var foundProject = await _dbContext.Projects.FindAsync(id);
-            if(foundProject is null)
+            if(foundProject == null)
             {
                 return NotFound("Project not found");
             }
 
             var foundProfile = await _dbContext.Profiles.FindAsync(body.ProfileID);
-            if(foundProfile is null)
+            if(foundProfile == null)
             {
                 return NotFound("Profile not found");
             }
 
+            _logger.LogInformation("body info: {body}", body.GithubURL);
+
             if(!string.IsNullOrWhiteSpace(body.Name)){
                 foundProject.Name = body.Name;
-            } else if (!string.IsNullOrWhiteSpace(body.Description)){
+            }
+            if (!string.IsNullOrWhiteSpace(body.Description)){
                 foundProject.Description = body.Description;
-            } else if (!string.IsNullOrWhiteSpace(body.GithubURL)){
+            }
+            if (!string.IsNullOrWhiteSpace(body.GithubURL)){
                 foundProject.GithubURL = body.GithubURL;
-            } else if (!string.IsNullOrWhiteSpace(body.DeployURL)){
+            }
+            if (!string.IsNullOrWhiteSpace(body.DeployURL)){
                 foundProject.DeployURL = body.DeployURL;
-            } else if (!string.IsNullOrWhiteSpace(body.ProfileID.ToString())){
+            }
+            if (!string.IsNullOrWhiteSpace(body.ProfileID.ToString())){
                 foundProject.ProfileID = (int)body.ProfileID;
-            } else if (foundProfile != null){
+            }
+            if (foundProfile != null){
                 foundProject.Profile = foundProfile;
             }
 
             _dbContext.Projects.Update(foundProject);
             await _dbContext.SaveChangesAsync();
+
             _logger.LogInformation(
                 "Project with ID {ID} updated at {UpdatedAt}",
                 foundProject.ID,
                 DateTime.Now
             );
 
-            return Ok(foundProfile);
+            return Ok(foundProject);
         }
 
         [HttpDelete("{id}", Name = "DeleteProject")]
@@ -114,13 +124,14 @@ namespace portfolio_api.Controllers {
 
             _dbContext.Projects.Remove(project);
             await _dbContext.SaveChangesAsync();
+            
             _logger.LogInformation(
                 "Project with ID {ID} deleted at {DeletedAt}",
                 project.ID,
                 DateTime.Now
             );
 
-            return Ok(project);
+            return NoContent();
         }
     }
 }
