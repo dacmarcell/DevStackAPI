@@ -110,21 +110,21 @@ POST {{portfolio_api_HostAddress}}/api/project
 Content-Type: application/json
 
 {
-    "name":"IdeaPlanAI",
+    "name":"GameRave",
     "description":"lorem ipsum",
-    "githubURL":"https://github.com/",
-    "deployURL":"https://deploy.com/",
+    "githubUrl":"https://github.com/",
+    "deployUrl":"https://deploy.com/",
     "profileID": 3
 }
 
 ### Atualizar projeto
 
-PATCH {{portfolio_api_HostAddress}}/api/project/3
+PATCH {{portfolio_api_HostAddress}}/api/project/1
 Content-Type: application/json
 
 {
     "name":"GameRave",
-    "profileID": 2
+    "profileID": 3
 }
 
 ### Deletar projeto
