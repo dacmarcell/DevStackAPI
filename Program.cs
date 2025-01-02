@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using portfolio_api.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +13,13 @@ builder.Services.AddEndpointsApiExplorer().AddSwaggerGen(services => {
     services.ResolveConflictingActions(options => options.First());
 });
 
-builder.Services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter()));
+builder.Services.AddControllers().AddNewtonsoftJson(options => 
+    {
+        options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+        options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+    }
+);
 builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(connectionString));
 
 var app = builder.Build();
