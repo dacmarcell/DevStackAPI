@@ -108,7 +108,7 @@ Easily implement it into your applications and start experiencing the power of A
 
 ### ☑️ Prerequisites
 
-Before getting started with portfolio-api, ensure your runtime environment meets the following requirements:
+Before getting started with DevStackAPI, ensure your runtime environment meets the following requirements:
 
 - **Programming Language:** CSharp
 - **Package Manager:** Nuget
