@@ -167,7 +167,7 @@ Run the test suite using the following command:
 ## 🔰 Contributing
 
 - **💬 [Join the Discussions](https://github.com/dacmarcell/DevStackAPI/discussions)**: Share your insights, provide feedback, or ask questions.
-- **🐛 [Report Issues](https://github.com/dacmarcell/DevStackAPI/issues)**: Submit bugs found or log feature requests for the `portfolio-api` project.
+- **🐛 [Report Issues](https://github.com/dacmarcell/DevStackAPI/issues)**: Submit bugs found or log feature requests for the `DevStackAPI` project.
 - **💡 [Submit Pull Requests](https://github.com/dacmarcell/DevStackAPI/blob/main/CONTRIBUTING.md)**: Review open PRs, and submit your own PRs.
 
 <details closed>
@@ -200,7 +200,7 @@ Run the test suite using the following command:
 <br>
 <p align="left">
    <a href="https://github.com{/dacmarcell/DevStackAPI/}graphs/contributors">
-      <img src="https://contrib.rocks/image?repo=dacmarcell/portfolio-api">
+      <img src="https://contrib.rocks/image?repo=dacmarcell/DevStackAPI">
    </a>
 </p>
 </details>
@@ -209,7 +209,7 @@ Run the test suite using the following command:
 
 ## 🎗 License
 
-This project is protected under the [SELECT-A-LICENSE](https://choosealicense.com/licenses) License. For more details, refer to the [LICENSE](https://choosealicense.com/licenses/) file.
+This project is protected under the [MIT](https://choosealicense.com/licenses/mit/) License. For more details, refer to the [LICENSE](https://choosealicense.com/licenses/) file.
 
 ---
 
