@@ -117,8 +117,9 @@ namespace portfolio_api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("Name")
-                        .HasColumnType("int");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(24)");
 
                     b.Property<int>("ProfileID")
                         .HasColumnType("int");
