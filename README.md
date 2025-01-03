@@ -5,7 +5,6 @@
 	<em><code>❯ DevStack API</code></em>
 </p>
 <p align="left">
-	<img src="https://img.shields.io/github/license/dacmarcell/DevStackAPI?style=default&logo=opensourceinitiative&logoColor=white&color=028a02" alt="license">
 	<img src="https://img.shields.io/github/last-commit/dacmarcell/DevStackAPI?style=default&logo=git&logoColor=white&color=028a02" alt="last-commit">
 	<img src="https://img.shields.io/github/languages/top/dacmarcell/DevStackAPI?style=default&color=028a02" alt="repo-top-language">
 	<img src="https://img.shields.io/github/languages/count/dacmarcell/DevStackAPI?style=default&color=028a02" alt="repo-language-count">
