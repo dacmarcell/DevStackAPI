@@ -122,6 +122,46 @@ namespace portfolio_api.Controllers{
             return Ok(profile);
         }
 
+        [HttpPost("{id}/post", Name = "ConnectOrDisconnectPost")]
+        public async Task<ActionResult<Profile>> ConnectOrDisconnectPost(int id, ConnectOrDisconnectPostDto body)
+        {
+            var profile = await _dbContext.Profiles
+                .Include(profile => profile.Projects)
+                .FirstOrDefaultAsync(profile => profile.ID == id);
+                
+            if (profile is null) {
+                return NotFound("Profile not found");
+            }
+
+            var post = await _dbContext.Posts.FindAsync(body.PostID);
+            if (post is null) {
+                return NotFound("Post not found");
+            }
+
+            if (body.Kind == ConnectOrDisconnect.Connect) {
+                profile.Posts.Add(post);
+            } else if (body.Kind == ConnectOrDisconnect.Disconnect) {
+                bool wasRemoved = profile.Posts.Remove(post);
+                if(wasRemoved == false){
+                    return NotFound("Post not found in Profile");
+                }
+            } else {
+                return BadRequest("Invalid Kind");
+            }
+            
+            _dbContext.Profiles.Update(profile);
+
+            await _dbContext.SaveChangesAsync();
+            _logger.LogInformation(
+                "Post with ID {PostID} connected to Profile with ID {ProfileID} at {CreatedAt}",
+                post.ID,
+                profile.ID,
+                DateTime.Now
+            );
+
+            return Ok(profile);
+        }
+
         [HttpPatch("{id}", Name = "UpdateProfile")]
         public async Task<ActionResult<Profile>> UpdateProfile(int id, [FromBody] Profile body){
             var foundProfile = await _dbContext.Profiles.FindAsync(id);
