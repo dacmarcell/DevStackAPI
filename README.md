@@ -41,8 +41,11 @@ Showcase your profile with simplicity and professionalism using our API!
 Whether you're a beginner programmer looking to explore API consumption or someone aiming to create a centralized and functional portfolio, our API is the perfect choice.
 
 With it, you can:
+
 ✅ Add and remove social media links, posts, and projects to your profile;
+
 ✅ Organize your portfolio efficiently and with a personal touch;
+
 ✅ Learn how to consume APIs while building something real for your professional growth.
 
 Perfect for beginners!
