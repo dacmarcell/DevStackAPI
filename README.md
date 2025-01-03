@@ -53,8 +53,11 @@ Easily implement it into your applications and start experiencing the power of A
 ## 👾 Features
 
 <code>❯Create a profile</code>
+
 <code>❯Add or remove a post to profile</code>
+
 <code>❯Add or remove a project to profile</code>
+
 <code>❯Add or remove a social media to profile</code>
 
 ---
