@@ -16,16 +16,28 @@ namespace portfolio_api.Controllers{
             _dbContext = dbContext;
         }
 
-        [HttpGet(Name = "GetProfile")]
-        public ActionResult<Profile> GetProfile(){
-            var profiles = _dbContext.Profiles;
+        [HttpGet(Name = "GetProfiles")]
+        public ActionResult<Profile> GetProfiles(){
+            var profiles = _dbContext.Profiles
+                .Include(profile => profile.SocialMedia)
+                .Include(profile => profile.Projects)
+                .Include(profile => profile.Posts)
+                .ToList();
+
             return Ok(profiles);
         }
 
         [HttpGet("{id}", Name = "GetProfileById")]
         public async Task<ActionResult<Profile>> GetProfileById(int id){
-            var profile = await _dbContext.Profiles.FindAsync(id);
-            if (profile is null){
+            var profile = await _dbContext.Profiles
+                .Include(profile => profile.SocialMedia)
+                .Include(profile => profile.Projects)
+                .Include(profile => profile.Posts)
+                .FirstOrDefaultAsync(profile => profile.ID == id);
+
+            _logger.LogInformation("profile posts >>> {profilePosts}", profile.Posts);
+
+            if (profile == null){
                 return NotFound("Profile not found");
             }
 
