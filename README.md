@@ -5,10 +5,10 @@
 	<em><code>❯ DevStack API</code></em>
 </p>
 <p align="left">
-	<img src="https://img.shields.io/github/license/dacmarcell/portfolio-api?style=default&logo=opensourceinitiative&logoColor=white&color=028a02" alt="license">
-	<img src="https://img.shields.io/github/last-commit/dacmarcell/portfolio-api?style=default&logo=git&logoColor=white&color=028a02" alt="last-commit">
-	<img src="https://img.shields.io/github/languages/top/dacmarcell/portfolio-api?style=default&color=028a02" alt="repo-top-language">
-	<img src="https://img.shields.io/github/languages/count/dacmarcell/portfolio-api?style=default&color=028a02" alt="repo-language-count">
+	<img src="https://img.shields.io/github/license/dacmarcell/DevStackAPI?style=default&logo=opensourceinitiative&logoColor=white&color=028a02" alt="license">
+	<img src="https://img.shields.io/github/last-commit/dacmarcell/DevStackAPI?style=default&logo=git&logoColor=white&color=028a02" alt="last-commit">
+	<img src="https://img.shields.io/github/languages/top/dacmarcell/DevStackAPI?style=default&color=028a02" alt="repo-top-language">
+	<img src="https://img.shields.io/github/languages/count/dacmarcell/DevStackAPI?style=default&color=028a02" alt="repo-language-count">
 </p>
 <p align="left"><!-- default option, no dependency badges. -->
 </p>
@@ -116,12 +116,12 @@ Install portfolio-api using one of the following methods:
 
 1. Clone the portfolio-api repository:
 ```sh
-❯ git clone https://github.com/dacmarcell/portfolio-api
+❯ git clone https://github.com/dacmarcell/DevStackAPI
 ```
 
 2. Navigate to the project directory:
 ```sh
-❯ cd portfolio-api
+❯ cd DevStackAPI
 ```
 
 3. Install the project dependencies:
@@ -166,9 +166,9 @@ Run the test suite using the following command:
 
 ## 🔰 Contributing
 
-- **💬 [Join the Discussions](https://github.com/dacmarcell/portfolio-api/discussions)**: Share your insights, provide feedback, or ask questions.
-- **🐛 [Report Issues](https://github.com/dacmarcell/portfolio-api/issues)**: Submit bugs found or log feature requests for the `portfolio-api` project.
-- **💡 [Submit Pull Requests](https://github.com/dacmarcell/portfolio-api/blob/main/CONTRIBUTING.md)**: Review open PRs, and submit your own PRs.
+- **💬 [Join the Discussions](https://github.com/dacmarcell/DevStackAPI/discussions)**: Share your insights, provide feedback, or ask questions.
+- **🐛 [Report Issues](https://github.com/dacmarcell/DevStackAPI/issues)**: Submit bugs found or log feature requests for the `portfolio-api` project.
+- **💡 [Submit Pull Requests](https://github.com/dacmarcell/DevStackAPI/blob/main/CONTRIBUTING.md)**: Review open PRs, and submit your own PRs.
 
 <details closed>
 <summary>Contributing Guidelines</summary>
@@ -176,7 +176,7 @@ Run the test suite using the following command:
 1. **Fork the Repository**: Start by forking the project repository to your github account.
 2. **Clone Locally**: Clone the forked repository to your local machine using a git client.
    ```sh
-   git clone https://github.com/dacmarcell/portfolio-api
+   git clone https://github.com/dacmarcell/DevStackAPI
    ```
 3. **Create a New Branch**: Always work on a new branch, giving it a descriptive name.
    ```sh
@@ -199,7 +199,7 @@ Run the test suite using the following command:
 <summary>Contributor Graph</summary>
 <br>
 <p align="left">
-   <a href="https://github.com{/dacmarcell/portfolio-api/}graphs/contributors">
+   <a href="https://github.com{/dacmarcell/DevStackAPI/}graphs/contributors">
       <img src="https://contrib.rocks/image?repo=dacmarcell/portfolio-api">
    </a>
 </p>
