@@ -2,7 +2,7 @@
 
 ### Obter perfil de usuário por ID
 
-GET {{portfolio_api_HostAddress}}/api/profile/2
+GET {{portfolio_api_HostAddress}}/api/profile/3
 Accept: application/json
 
 ### Obter perfis de usuário
@@ -142,4 +142,37 @@ Content-Type: application/json
 ### Deletar projeto
 
 DELETE {{portfolio_api_HostAddress}}/api/project/1
+Accept: application/json
+
+### Obter postagens
+
+GET {{portfolio_api_HostAddress}}/api/post/
+Accept: application/json
+
+### Criar projeto
+
+POST {{portfolio_api_HostAddress}}/api/post
+Content-Type: application/json
+
+{
+    "title":"How to create a portfolio api",
+    "content":"lorem ipsum",
+    "profileID": 3
+}
+
+### Atualizar projeto
+
+PATCH {{portfolio_api_HostAddress}}/api/post/1
+Content-Type: application/json
+
+{
+    "name":"GameRave",
+    "profileID": 3,
+    "githubUrl":"https://bdc.com/",
+    "deployUrl":"https://deploy.com/"
+}
+
+### Deletar projeto
+
+DELETE {{portfolio_api_HostAddress}}/api/post/1
 Accept: application/json
