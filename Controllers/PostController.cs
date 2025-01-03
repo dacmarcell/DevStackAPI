@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using portfolio_api.Data;
+using portfolio_api.Dtos.PostDtos;
 using portfolio_api.Models;
 
 namespace portfolio_api.Controllers
@@ -32,7 +33,27 @@ namespace portfolio_api.Controllers
         }
 
         [HttpPost(Name = "CreatePost")]
-        public async Task<ActionResult<Post>> CreatePost(Post post){
+        public async Task<ActionResult<Post>> CreatePost(CreatePostDto body){
+            if (string.IsNullOrEmpty(body.Title)){
+                return BadRequest("Title is required");
+            } else if(string.IsNullOrEmpty(body.Content)){
+                return BadRequest("Content is required");
+            } else if(string.IsNullOrEmpty(body.ProfileID.ToString())){
+                return BadRequest("ProfileID is required");
+            }
+
+            var profile = await _dbContext.Profiles.FindAsync(body.ProfileID);
+            if(profile is null){
+                return NotFound("Profile not found");
+            }
+
+            var post = new Post{
+                Title = body.Title,
+                Content = body.Content,
+                ProfileID = body.ProfileID,
+                Profile = profile
+            };
+
             _dbContext.Posts.Add(post);
             await _dbContext.SaveChangesAsync();
 
